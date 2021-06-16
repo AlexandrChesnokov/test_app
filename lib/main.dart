@@ -16,33 +16,30 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  List colors = [Colors.red, Colors.green, Colors.yellow];
   Random random = new Random();
 
   int red = 255;
   int green = 255;
   int blue = 255;
   double opacity = 1.0;
-  
 
   void changeColor() {
     setState(() {
-    red = random.nextInt(255);
-    green = random.nextInt(255);
-    blue = random.nextInt(255);
-    opacity = random.nextDouble();
+      red = random.nextInt(255);
+      green = random.nextInt(255);
+      blue = random.nextInt(255);
+      opacity = random.nextDouble();
     });
   }
 
-@override
+  @override
   Widget build(BuildContext context) {
     return Material(
       child: GestureDetector(
         onTap: () => changeColor(),
         child: Container(
           alignment: Alignment.center,
-          color: Color.fromRGBO(red, green,
-            blue, opacity),
+          color: Color.fromRGBO(red, green, blue, opacity),
           child: Text(
             'Hey there',
             style: TextStyle(fontSize: 20, color: Colors.black),
@@ -51,37 +48,4 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
-  /* @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color.fromRGBO(red, green,
-          blue, opacity),
-      appBar: AppBar(
-        title: Text('test app'),
-      ),
-      
-        body: GestureDetector(
-          child: Center(child: Text('Hey there')),
-          onTap: () {
-            setState(() {
-              changeColor();
-            });
-          },
-          
-      ),
-    );
-  } */
 }
-
-  class MyText extends StatelessWidget {
-    @override 
-    Widget build(BuildContext context) {
-      return Text('Hey there', style: TextStyle(color: Colors.black,
-      fontSize: 20)
-      );
-    }
-  }
-
-
-
-
