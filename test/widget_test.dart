@@ -7,24 +7,28 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:test_app/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+  testWidgets('Test text, tap, color', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(home: MyApp()));
+    var startColor = Color.fromRGBO(255, 255, 255, 1.0);
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    expect(find.text('Hey there'),
+        findsOneWidget); // testing the presence of text('Hey there') in the widget
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    expect(
+        ((tester.firstWidget(find.byType(Container)) as Container)).color ==
+            startColor,
+        true); // testing start color in the widget
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    await tester
+        .tap(find.byType(GestureDetector)); // testing the click on the widget
+    await tester.pump(new Duration(milliseconds: 1000));
+
+    expect(
+        ((tester.firstWidget(find.byType(Container)) as Container)).color ==
+            startColor,
+        false); // testing the color change after clicking
   });
 }
